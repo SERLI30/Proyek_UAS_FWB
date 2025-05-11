@@ -16,17 +16,72 @@ Role dan Fitur-fiturnya
 -  Melihat status pesanan: Mengetahui status "pending", "completed", dll.
 
 Tabel-tabel database beserta field dan tipe datanya
-1. users (Users)
-| Nama Field | Tipe Data                            | Keterangan            |
-|------------|--------------------------------------|------------------------|
-| id         | BigIncrements                        | Primary Key           |
-| name       | String                               | Nama pengguna         |
-| email      | String (unique)                      | Email unik            |
-| password   | String                               | Password terenkripsi  |
-| role       | Enum('admin', 'seller', 'customer')  | Peran pengguna        |
+Struktur Tabel Database
+
+1. users
+
+| Nama Field | Tipe Data                            | Keterangan              |
+|------------|--------------------------------------|--------------------------|
+| id         | BigIncrements                        | Primary Key             |
+| name       | String                               | Nama pengguna           |
+| email      | String (unique)                      | Email unik              |
+| password   | String                               | Password terenkripsi    |
+| role       | Enum('admin', 'seller', 'customer')  | Peran pengguna          |
 | timestamps | Timestamps                           | Otomatis dibuat/diperbarui |
 
+2. profil
 
+| Nama Field | Tipe Data     | Keterangan                |
+|------------|---------------|----------------------------|
+| id         | BigIncrements | Primary Key               |
+| users_id   | ForeignId     | One-to-One ke `users`     |
+| alamat     | String        | Alamat pengguna           |
+| no_hp      | String        | Nomor HP                  |
+| timestamps | Timestamps    | Otomatis dibuat/diperbarui |
+
+3. kategori
+
+| Nama Field | Tipe Data     | Keterangan        |
+|------------|---------------|-------------------|
+| id         | BigIncrements | Primary Key       |
+| name       | String        | Nama kategori     |
+| timestamps | Timestamps    |                   |
+
+4. produk
+
+| Nama Field  | Tipe Data       | Keterangan                          |
+|-------------|-----------------|--------------------------------------|
+| id          | BigIncrements   | Primary Key                          |
+| name        | String          | Nama produk                          |
+| price       | Decimal(10,2)   | Harga produk                         |
+| stok        | Integer         | Stok produk                          |
+| deskripsi   | Text (nullable) | Deskripsi produk                     |
+| kategori_id | ForeignId       | FK ke `kategori`                     |
+| seller_id   | ForeignId       | FK ke `users` (role: seller)         |
+| timestamps  | Timestamps      | Otomatis dibuat/diperbarui           |
+
+5. transaksi
+
+| Nama Field     | Tipe Data                        | Keterangan                          |
+|----------------|----------------------------------|--------------------------------------|
+| id             | BigIncrements                   | Primary Key                         |
+| customer_id    | ForeignId                       | FK ke `users` (role: customer)       |
+| total_price    | Decimal(10,2)                   | Total harga semua produk             |
+| status         | Enum('pending', 'completed')    | Status transaksi                     |
+| payment_method | String (default: 'cod')         | Metode pembayaran (COD)             |
+| lokasi_temu    | String (nullable)               | Lokasi temu antara customer & seller |
+| timestamps     | Timestamps                      | Otomatis dibuat/diperbarui          |
+
+6. detail_transaksi
+
+| Nama Field    | Tipe Data     | Keterangan                       |
+|---------------|---------------|-----------------------------------|
+| id            | BigIncrements | Primary Key                      |
+| transaksi_id  | ForeignId     | FK ke `transaksi`                |
+| produk_id     | ForeignId     | FK ke `produk`                   |
+| quantity      | Integer       | Jumlah beli                      |
+| subtotal      | Decimal(10,2) | Harga satuan × quantity          |
+| timestamps    | Timestamps    | Otomatis dibuat/diperbarui       |
 
 
 Jenis relasi dan tabel yang berelasi
