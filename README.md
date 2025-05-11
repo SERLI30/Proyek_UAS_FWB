@@ -1,67 +1,93 @@
-[Lihat Laporannya disini](https://github.com/SERLI30/Proyek_UAS_FWB/blob/main/proyek_fwb_Serli_D0223024.pdf)
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Role dan Fitur-fiturnya
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ 1. Admin
+-  Kelola data pengguna: Melihat, menambah, mengedit, dan menghapus pengguna (customer/seller).
+-  Kelola data produk: Mengedit atau menghapus produk milik seller.
+-  Kelola transaksi: Melihat semua transaksi yang dilakukan oleh customer, lengkap dengan status dan detail.
+  
+ 2. Seller
+-  Tambah produk: Menambahkan produk dengan nama, harga, stok, deskripsi, dan kategori.
+-  Melihat daftar produk milik sendiri: Produk yang dibuat sendiri (filter berdasarkan seller_id).
+-  Melihat transaksi masuk: Daftar transaksi yang berkaitan dengan produk milik seller.
 
-## About Laravel
+ 3. Customer
+-  Melihat produk: Menelusuri semua produk yang tersedia.
+-  Membeli produk: Memilih produk dan checkout (masuk ke tabel transaksi dan detail_transaksi).
+-  Melihat status pesanan: Mengetahui status "pending", "completed", dll.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tabel-tabel database beserta field dan tipe datanya
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ 1. `users` (Users)
+| Nama Field | Tipe Data                            | Keterangan            |
+|------------|--------------------------------------|------------------------|
+| id         | BigIncrements                        | Primary Key           |
+| name       | String                               | Nama pengguna         |
+| email      | String (unique)                      | Email unik            |
+| password   | String                               | Password terenkripsi  |
+| role       | Enum('admin', 'seller', 'customer')  | Peran pengguna        |
+| timestamps | Timestamps                           | Otomatis dibuat/diperbarui |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+ 2. `profil`
+| Nama Field  | Tipe Data     | Keterangan                        |
+|-------------|---------------|------------------------------------|
+| id          | BigIncrements | Primary Key                        |
+| users_id | ForeignId     | One-to-One ke `pengguna`          |
+| alamat      | String        | Alamat pengguna                   |
+| no_hp       | String        | Nomor HP                          |
+| timestamps  | Timestamps    |                                    |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ 3. `kategori`
+| Nama Field | Tipe Data     | Keterangan        |
+|------------|---------------|-------------------|
+| id         | BigIncrements | Primary Key       |
+| name       | String        | Nama kategori     |
+| timestamps | Timestamps    |                   |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ 4. `produk`
+| Nama Field  | Tipe Data       | Keterangan                          |
+|-------------|-----------------|--------------------------------------|
+| id          | BigIncrements   | Primary Key                          |
+| name        | String          | Nama produk                          |
+| price       | Decimal(10,2)   | Harga produk                         |
+| stok        | Integer         | Stok produk                          |
+| deskripsi   | Text (nullable) | Deskripsi produk                     |
+| kategori_id | ForeignId       | FK ke `kategori`                     |
+| seller_id   | ForeignId       | FK ke `pengguna` (role: seller)      |
+| timestamps  | Timestamps      |                                      |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+ 5. `transaksi`
+| Nama Field     | Tipe Data                        | Keterangan                         |
+|----------------|----------------------------------|-------------------------------------|
+| id             | BigIncrements                   | Primary Key                        |
+| customer_id    | ForeignId                       | FK ke `pengguna` (role: customer)  |
+| total_price    | Decimal(10,2)                   | Total harga semua produk           |
+| status         | Enum('pending', 'completed')    | Status transaksi                   |
+| payment_method | String (default: cod)           | Metode pembayaran (COD)            |
+| lokasi_temu    | String (nullable)               | Lokasi temu antara customer & seller |
+| timestamps     | Timestamps                      |                                    |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+ 6. `detail_transaksi`
+| Nama Field    | Tipe Data     | Keterangan                           |
+|---------------|---------------|---------------------------------------|
+| id            | BigIncrements | Primary Key                           |
+| transaksi_id  | ForeignId     | FK ke `transaksi`                     |
+| produk_id     | ForeignId     | FK ke `produk`                        |
+| quantity      | Integer       | Jumlah beli                           |
+| subtotal      | Decimal(10,2) | Harga satuan * quantity               |
+| timestamps    | Timestamps    |                                       |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+Jenis relasi dan tabel yang berelasi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Tabel Asal  | Tabel Tujuan      | Relasi       | Keterangan                            |
+|-------------|-------------------|--------------|----------------------------------------|
+| users       | produk            | One-to-Many  | Seller bisa punya banyak produk        |
+| users       | transaksi         | One-to-Many  | Customer bisa lakukan banyak transaksi |
+| users       | profil            | One-to-One   | 1 user punya 1 profil                  |
+| kategori    | produk            | One-to-Many  | 1 kategori punya banyak produk         |
+| produk      | detail_transaksi  | One-to-Many  | Produk bisa masuk ke banyak transaksi |
+| transaksi   | detail_transaksi  | One-to-Many  | 1 transaksi berisi banyak produk       |
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
