@@ -45,7 +45,7 @@ Struktur Tabel Database
 |------------|---------------|-------------------|
 | id         | BigIncrements | Primary Key       |
 | name       | String        | Nama kategori     |
-| timestamps | Timestamps    |                   |
+| timestamps | Timestamps    |       Otomatis dibuat/diperbarui            |
 
 4. produk
 
