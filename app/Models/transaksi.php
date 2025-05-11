@@ -3,12 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-class transaksi extends Model
+
+class Transaksi extends Model
 {
-    use HasFactory;
 
     protected $table = 'transaksi';
 
-    protected $fillable = ['customer_id', 'total_price', 'status', 'payment_method'];
+    // Tentukan kolom yang dapat diisi secara massal
+    protected $fillable = [
+        'customer_id',
+        'total_price',
+        'status',
+        'payment_method',
+        'lokasi_temu',
+    ];
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    public function produk()
+    {
+        return $this->belongsToMany(Produk::class, 'detail_transaksi')
+                    ->withPivot('quantity', 'subtotal')
+                    ->withTimestamps();
+    }
 }
+
+

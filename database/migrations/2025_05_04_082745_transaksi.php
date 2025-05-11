@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
             $table->decimal('total_price', 10, 2);
-            $table->enum('status', ['pending', 'shipped', 'completed', 'cancelled'])->default('pending');
-            $table->enum('payment_method', ['cod'])->default('cod');
+            $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('payment_method')->default('cod');
+            $table->string('lokasi_temu')->nullable();
             $table->timestamps();
-        
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     public function down(): void {

@@ -15,15 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price', 10, 2);
-            $table->integer('stock');
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('kategori_id');
-            $table->unsignedBigInteger('seller_id');
+            $table->integer('stok');
+            $table->text('deskripsi')->nullable();
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade');
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
-
-            // Foreign keys
-            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
-            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
