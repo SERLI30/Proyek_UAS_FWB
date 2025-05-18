@@ -12,9 +12,9 @@ class Profil extends Model
     // Tentukan kolom yang dapat diisi secara massal
     protected $fillable = [
         'users_id',
-        'address',
-        'phone_number',
-        'dob',
+        'alamat',
+        'no_hp',
+       
     ];
 
     public function user()

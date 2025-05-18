@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Pengguna;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class usersSeeder extends Seeder
@@ -15,16 +15,22 @@ class usersSeeder extends Seeder
      */
     public function run(): void
     {
-        Users::insert([
+        User::insert([
+            [
+                'name' => 'Admin Utama',
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('admin123'),
+                'role' => 'admin',
+            ],
             [
                 'name' => 'Seller A',
-                'email' => 'seller@example.com',
+                'email' => 'seller@gmail.com',
                 'password' => bcrypt('112'),
                 'role' => 'seller',
             ],
             [
                 'name' => 'customer1',
-                'email' => "customer@example.com",
+                'email' => "customer@gmail.com",
                 'password' => bcrypt('111'),
                 'role' => 'customer'
             ],

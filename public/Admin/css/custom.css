@@ -1,0 +1,134 @@
+/* Background utama dengan tekstur kertas halus (gunakan gambar atau warna solid krem) */
+body {
+    font-family: 'Playfair Display', serif;
+    background-color: #e6e4cf !important;
+    background-image: url("https://www.transparenttextures.com/patterns/old-map.png"); /* contoh tekstur vintage */
+    background-repeat: repeat;
+}
+
+/* Header / Topbar - warna emas klasik dengan border */
+.topbar {
+    background-color: #b89c6a !important; /* emas klasik agak terang */
+    border-bottom: 2px solid #5c4b2a; /* coklat gelap */
+    box-shadow: 0 4px 8px rgba(184, 156, 106, 0.5);
+}
+
+/* Sidebar - coklat tua dengan efek gradient lembut */
+.sidebar {
+    background: linear-gradient(145deg, #5c4033 0%, #3b2e1f 100%) !important;
+    box-shadow: inset 3px 0 10px rgba(255, 215, 0, 0.1);
+}
+
+/* Link sidebar */
+.sidebar .nav-link,
+.sidebar .nav-item .nav-link span {
+    color: #f5e3b3 !important; /* krem pucat */
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #9a7d43 !important; /* emas kecoklatan */
+    color: #fff8dc !important; /* krem */
+    font-style: italic;
+}
+
+/* Icon sidebar */
+.sidebar .nav-link i {
+    color: #ffd700 !important; /* kuning emas */
+    text-shadow: 1px 1px 1px #5c4033;
+}
+
+/* Card dashboard */
+.card {
+    background-color: #fff8e7; /* krem cerah */
+    border: 1px solid #c1a661;
+    border-radius: 15px;
+    box-shadow: 3px 5px 10px rgba(140, 110, 60, 0.3);
+    font-size: 1.1rem;
+    color: #4b3a1b;
+}
+
+/* Tombol */
+.btn-primary,
+.btn-success,
+.btn-warning,
+.btn-info {
+    background-color: #9a7d43 !important;
+    border-color: #6f5d26 !important;
+    color: #fff8dc;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 2px 3px 5px rgba(150, 120, 40, 0.7);
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-warning:hover,
+.btn-info:hover {
+    background-color: #b89c6a !important;
+    color: #5c4033 !important;
+    box-shadow: 0 0 10px #ffd700;
+}
+
+/* Judul dan teks */
+h1, h2, h3, h4, h5 {
+    color: #6b4f23;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 1px 1px 0 #d9c58a;
+    letter-spacing: 0.05em;
+}
+
+/* Table */
+.table th {
+    background-color: #b89c6a;
+    color: #3b2e1f;
+    font-weight: 700;
+    border-bottom: 2px solid #5c4033;
+}
+
+.table td {
+    color: #5c4033;
+    border-bottom: 1px solid #d7caa8;
+}
+
+/* Scrollbar (jika ada) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9a7d43;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b89c6a;
+}
+/* Hilangkan background putih default dari container utama */
+.content,
+.content-wrapper,
+.container-fluid,
+.container,
+#content,
+#content-wrapper {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Hilangkan efek putih di belakang grafik atau konten */
+.bg-white,
+.bg-light,
+.page-content {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Opsional: jika ada padding yang terlalu besar */
+.content,
+#content {
+    padding: 1.5rem;
+}
+
