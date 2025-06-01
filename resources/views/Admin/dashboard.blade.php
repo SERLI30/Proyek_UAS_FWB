@@ -1,8 +1,7 @@
 
     @extends('layouts.master')
     @section('content')
-    {{-- <h1>Dashboard Admin</h1>
-    <p>Selamat datang, {{ Auth::user()->name }}</p> --}}
+
     <!-- Page Wrapper --> 
     <div id="wrapper">
 
@@ -10,7 +9,7 @@
         <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-           
+
 {{-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
     <div class="sidebar-brand-icon">
         
@@ -20,10 +19,9 @@
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('Admin\img\Vintages.png') }}" width="40" height="40">
-                   
                 </div>
-                <div class="sidebar-brand-text mx-3">VintageMuse Admin <sup></sup></div>
+                {{-- <i class="fas fa-user-shield"></i> --}}
+                <div class="sidebar-brand-text mx-3">VintageMuse<sup></sup></div>
             </a>
 
             <!-- Divider -->
@@ -32,8 +30,8 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -336,9 +334,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">VintageMuse</span>
+                                <img src="{{ asset('Admin\img\Vintages.png') }}" width="40" height="40">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

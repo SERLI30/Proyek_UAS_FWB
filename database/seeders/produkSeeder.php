@@ -8,9 +8,7 @@ use App\Models\Produk;
 
 class produkSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         Produk::insert([

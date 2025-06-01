@@ -9,7 +9,7 @@ class Produk extends Model
 
     protected $table = 'produk';
 
-    // Tentukan kolom yang dapat diisi secara massal
+    
     protected $fillable = [
         'name',
         'price',

@@ -2,14 +2,14 @@
 body {
     font-family: 'Playfair Display', serif;
     background-color: #e6e4cf !important;
-    background-image: url("https://www.transparenttextures.com/patterns/old-map.png"); /* contoh tekstur vintage */
+    background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
     background-repeat: repeat;
 }
 
 /* Header / Topbar - warna emas klasik dengan border */
 .topbar {
-    background-color: #b89c6a !important; /* emas klasik agak terang */
-    border-bottom: 2px solid #5c4b2a; /* coklat gelap */
+    background-color: #b89c6a !important; 
+    border-bottom: 2px solid #5c4b2a; 
     box-shadow: 0 4px 8px rgba(184, 156, 106, 0.5);
 }
 
@@ -29,20 +29,20 @@ body {
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #9a7d43 !important; /* emas kecoklatan */
-    color: #fff8dc !important; /* krem */
+    background-color: #9a7d43 ;
+    color: #fff8dc ; 
     font-style: italic;
 }
 
 /* Icon sidebar */
 .sidebar .nav-link i {
-    color: #ffd700 !important; /* kuning emas */
+    color: #ffd700 !important; 
     text-shadow: 1px 1px 1px #5c4033;
 }
 
 /* Card dashboard */
 .card {
-    background-color: #fff8e7; /* krem cerah */
+    background-color: #fff8e7; 
     border: 1px solid #c1a661;
     border-radius: 15px;
     box-shadow: 3px 5px 10px rgba(140, 110, 60, 0.3);
@@ -118,13 +118,13 @@ h1, h2, h3, h4, h5 {
     box-shadow: none !important;
 }
 
-/* Hilangkan efek putih di belakang grafik atau konten */
+/* Hilangkan efek putih di belakang grafik atau konten
 .bg-white,
 .bg-light,
 .page-content {
     background-color: transparent !important;
     background-image: none !important;
-}
+} */
 
 /* Opsional: jika ada padding yang terlalu besar */
 .content,
