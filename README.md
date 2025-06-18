@@ -1,8 +1,8 @@
 Role dan Fitur-fiturnya
 
  1. Admin
--  Kelola data pengguna: Melihat, menambah, mengedit, dan menghapus pengguna (customer/seller).
--  Kelola data produk: Mengedit atau menghapus produk milik seller.
+-  Kelola data pengguna: Melihat dan menghapus pengguna (customer/seller).
+-  Kelola data produk: menghapus produk milik seller.
 -  Kelola transaksi: Melihat semua transaksi yang dilakukan oleh customer, lengkap dengan status dan detail.
   
  2. Seller
@@ -13,7 +13,7 @@ Role dan Fitur-fiturnya
  3. Customer
 -  Melihat produk: Menelusuri semua produk yang tersedia.
 -  Membeli produk: Memilih produk dan checkout (masuk ke tabel transaksi dan detail_transaksi).
--  Melihat status pesanan: Mengetahui status "pending", "completed", dll.
+-  Melihat status pesanan: Mengetahui status "pending".
 
 Tabel-tabel database beserta field dan tipe datanya
 Struktur Tabel Database
