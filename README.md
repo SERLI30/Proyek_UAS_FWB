@@ -31,13 +31,15 @@ Struktur Tabel Database
 
 2. profil
 
-| Nama Field | Tipe Data     | Keterangan                |
-|------------|---------------|----------------------------|
-| id         | BigIncrements | Primary Key               |
-| users_id   | ForeignId     | One-to-One ke `users`     |
-| alamat     | String        | Alamat pengguna           |
-| no_hp      | String        | Nomor HP                  |
-| timestamps | Timestamps    | Otomatis dibuat/diperbarui |
+| Kolom       | Tipe Data     | Keterangan                                      |
+|-------------|---------------|-------------------------------------------------|
+| `id`        | BIGINT (PK)   | Primary key, auto increment                     |
+| `users_id`  | BIGINT (FK)   | Relasi ke tabel `users` (unik, satu-satu)       |
+| `nama`      | VARCHAR       | Opsional, menyimpan nama panggilan atau lengkap |
+| `alamat`    | VARCHAR       | Alamat lengkap user                             |
+| `no_hp`     | VARCHAR       | Nomor handphone                                |
+| `foto`      | VARCHAR       | Path atau nama file foto profil                 |
+| `timestamps`| TIMESTAMP     | Kolom `created_at` dan `updated_at` otomatis    |
 
 3. kategori
 
