@@ -14,6 +14,7 @@ class Profil extends Model
         'users_id',
         'alamat',
         'no_hp',
+        'foto',
        
     ];
 

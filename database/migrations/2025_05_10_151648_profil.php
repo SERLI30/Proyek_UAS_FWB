@@ -14,8 +14,10 @@ return new class extends Migration
        Schema::create('profil', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->unique()->constrained('users')->onDelete('cascade');
+              $table->string('nama')->nullable();
             $table->string('alamat');
             $table->string('no_hp');
+            $table->string('foto');
             $table->timestamps();
         });
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('profil');
     }
 };

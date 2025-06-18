@@ -3,58 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    // Menampilkan halaman profil penjual
+    public function penjual()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = Auth::user();
+        $profil = $user->profil;
+        return view('profile.penjual', compact('user', 'profil'));
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    // Menampilkan halaman profil pembeli
+    public function pembeli()
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
+        $profil = $user->profil;
+        return view('profile.pembeli', compact('user', 'profil'));
+    }
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    // Memperbarui data profil
+    public function update(ProfileUpdateRequest $request)
+    {
+        $user = $request->user();
+
+        // Update data user (name & email)
+        $user->fill($request->only('name', 'email'));
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+        $user->save();
+
+        // Update data profil (nama lengkap, alamat, foto)
+        $dataProfil = $request->only('nama_lengkap', 'alamat', 'no_hp');
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($user->profil && $user->profil->foto) {
+                Storage::disk('public')->delete($user->profil->foto);
+            }
+
+            // Simpan foto baru
+            $dataProfil['foto'] = $request->file('foto')->store('foto-profil', 'public');
         }
 
-        $request->user()->save();
+        // Simpan atau update profil
+        $user->profil()->updateOrCreate(['users_id' => $user->id], $dataProfil);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Redirect ke halaman profil sesuai role
+        return redirect()->route(
+            $user->role === 'seller' ? 'profile.penjual' : 'profile.pembeli'
+        )->with('status', 'Profil berhasil diperbarui.');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    // Menghapus akun pengguna
+    public function destroy(Request $request)
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();
-
         Auth::logout();
 
+        // Hapus user & profil
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect()->route('login');
     }
 }

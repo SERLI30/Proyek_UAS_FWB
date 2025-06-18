@@ -25,10 +25,16 @@ class Transaksi extends Model
 
     public function produk()
     {
-        return $this->belongsToMany(Produk::class, 'detail_transaksi')
-                    ->withPivot('quantity', 'subtotal')
-                    ->withTimestamps();
+        return $this->belongsToMany(Produk::class, 'detail_transaksi', 'transaksi_id', 'produk_id')
+                ->withPivot('quantity', 'subtotal')
+                ->withTimestamps();
+
     }
+    public function detailTransaksi()
+{
+    return $this->hasMany(DetailTransaksi::class, 'transaksi_id');
+}
+
 }
 
 

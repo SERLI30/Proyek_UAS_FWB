@@ -16,6 +16,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // Validasi tabel users
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -25,6 +26,12 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+
+            // Tambahan validasi untuk tabel profil
+            'nama_lengkap' => ['nullable', 'string', 'max:255'],
+            'no_hp' => ['required', 'string', 'max:20'],
+            'alamat' => ['nullable', 'string'],
+             'foto' => ['nullable', 'image'],
         ];
     }
 }

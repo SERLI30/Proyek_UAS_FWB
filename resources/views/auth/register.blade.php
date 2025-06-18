@@ -38,6 +38,15 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+        <div class="mt-4">
+    <x-input-label for="role" :value="('Role')" />
+    <select id="role" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" name="role" required>
+        <option value="" {{ old('role') == '' ? 'selected' : '' }} disabled hidden>Pilih Role</option>
+        <option value="seller" {{ old('role') == 'seller' ? 'selected' : '' }}>seller</option>
+        <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>customer</option>
+    </select>
+    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+</div>
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">

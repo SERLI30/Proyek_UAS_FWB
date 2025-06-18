@@ -15,9 +15,9 @@ class kategoriSeeder extends Seeder
 
     {
         Kategori::insert([
-            ['name' => 'Pakaian'],
-            ['name' => 'Aksesori'],
-            ['name' => 'Perabot Vintage'],
+           ['name' => 'Pria'],
+            ['name' => 'Wanita'],
+            ['name' => 'Aksesoris'],
         ]);
     }
 }

@@ -16,9 +16,12 @@ body {
 /* Sidebar - coklat tua dengan efek gradient lembut */
 .sidebar {
     background: linear-gradient(145deg, #5c4033 0%, #3b2e1f 100%) !important;
+    color: #f5e3b3 !important;
     box-shadow: inset 3px 0 10px rgba(255, 215, 0, 0.1);
 }
-
+#accordionSidebar {
+    background: linear-gradient(145deg, #5c4033 0%, #3b2e1f 100%) !important;
+}
 /* Link sidebar */
 .sidebar .nav-link,
 .sidebar .nav-item .nav-link span {
@@ -132,3 +135,32 @@ h1, h2, h3, h4, h5 {
     padding: 1.5rem;
 }
 
+.sidebar-brand,
+.sidebar-brand a,
+.sidebar .brand-text {
+    color: #f5e3b3 !important; /* warna emas pucat */
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #5c4033;
+}
+html, body {
+    height: 100%;
+}
+
+#page-top {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
