@@ -86,12 +86,18 @@ Struktur Tabel Database
 
 Jenis relasi dan tabel yang berelasi
 
-| Tabel Asal  | Tabel Tujuan      | Relasi       | Keterangan                            |
-|-------------|-------------------|--------------|----------------------------------------|
-| users       | produk            | One-to-Many  | Seller bisa punya banyak produk        |
-| users       | transaksi         | One-to-Many  | Customer bisa lakukan banyak transaksi |
-| users       | profil            | One-to-One   | 1 user punya 1 profil                  |
-| kategori    | produk            | One-to-Many  | 1 kategori punya banyak produk         |
-| produk      | detail_transaksi  | One-to-Many  | Produk bisa masuk ke banyak transaksi |
-| transaksi   | detail_transaksi  | One-to-Many  | 1 transaksi berisi banyak produk       |
+| Tabel Asal        | Tabel Tujuan         | Relasi         | Keterangan                                                                 |
+|------------------|----------------------|----------------|----------------------------------------------------------------------------|
+| `users`          | `produk`             | One-to-Many    | Seorang **seller** (user) bisa memiliki banyak produk                      |
+| `users`          | `transaksi`          | One-to-Many    | Seorang **customer** (user) bisa melakukan banyak transaksi                |
+| `users`          | `profil`             | One-to-One     | Setiap user memiliki 1 profil (disimpan di tabel `profil`)                 |
+| `kategori`       | `produk`             | One-to-Many    | Satu kategori bisa memiliki banyak produk                                  |
+| `produk`         | `detail_transaksi`   | One-to-Many    | Satu produk bisa muncul di banyak detail transaksi                         |
+| `transaksi`      | `detail_transaksi`   | One-to-Many    | Satu transaksi bisa memiliki banyak detail transaksi (produk + quantity)   |
+| `produk`         | `transaksi`          | Many-to-Many   | Produk dan transaksi dihubungkan oleh tabel pivot `detail_transaksi`      |
+| `transaksi`      | `produk`             | Many-to-Many   | Transaksi bisa berisi banyak produk melalui pivot `detail_transaksi`      |
+| `detail_transaksi` | `produk`           | Many-to-One    | Setiap detail transaksi mengacu ke satu produk                             |
+| `detail_transaksi` | `transaksi`        | Many-to-One    | Setiap detail transaksi mengacu ke satu transaksi                          |
+| `profil`         | `users`              | Many-to-One    | Setiap profil dimiliki oleh satu user                                      |
 
+---
